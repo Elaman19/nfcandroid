@@ -2,7 +2,6 @@ package com.project.nfc_android;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
