@@ -1,4 +1,4 @@
-package com.example.nfc_android;
+package com.project.nfc_android;
 
 import android.content.Context;
 

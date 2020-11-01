@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.nfc_android"
+        applicationId "com.project.nfc_android"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1

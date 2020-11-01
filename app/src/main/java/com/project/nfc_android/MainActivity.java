@@ -1,4 +1,4 @@
-package com.example.nfc_android;
+package com.project.nfc_android;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -25,9 +25,9 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    public static final String ERROR_DETECTED = "NFC считыватель не найден!";
-    public static final String WRITE_SUCCESS = "Сообщение успешно записано!";
-    public static final String WRITE_ERROR = "Ошибка во время записи, попробуйте поднести устройство поближе к считывателю";
+    public static final String ERROR_DETECTED = "No NFC tag detected!";
+    public static final String WRITE_SUCCESS = "Text written to the NFC tag successfully!";
+    public static final String WRITE_ERROR = "Error during writing, is the NFC tag close enough to your device?";
     NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     IntentFilter[] writeTagFilters;
@@ -74,7 +74,8 @@ public class MainActivity extends Activity {
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this); // получаем
         if (nfcAdapter == null) {
-            Toast.makeText(this, "Это устройство не поддерживает NFC.", Toast.LENGTH_LONG).show();
+            // Stop here, we definitely need NFC
+            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
             finish();
         }
         readFromIntent(getIntent());
@@ -87,7 +88,7 @@ public class MainActivity extends Activity {
 
 
     /******************************************************************************
-     ********************************* Чтение NFC метки ***************************
+     *********************************Read From NFC Tag***************************
      ******************************************************************************/
     private void readFromIntent(Intent intent) {
         String action = intent.getAction();
@@ -130,7 +131,7 @@ public class MainActivity extends Activity {
 
 
     /******************************************************************************
-     происходит запись сообщения
+     *****************************Write to NFC Tag*********************************
      ******************************************************************************/
     private void write(String text, Tag tag) throws IOException, FormatException {
         NdefRecord[] records = { createRecord(text) };
@@ -188,14 +189,14 @@ public class MainActivity extends Activity {
     }
 
     /******************************************************************************
-     **********************************Активация режима записи*********************
+     **********************************Enable Write********************************
      ******************************************************************************/
     private void WriteModeOn(){
         writeMode = true;
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, writeTagFilters, null);
     }
     /******************************************************************************
-     **********************************Деактивация режима записи*******************
+     *********************************Disable Write********************************
      ******************************************************************************/
     private void WriteModeOff(){
         writeMode = false;
